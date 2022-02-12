@@ -1,0 +1,48 @@
+package lv.startit.minesana;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    int iedomatais = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        Random r = new Random();
+        iedomatais = r.nextInt(100) + 1;
+    }
+    public void click (View view) {
+        EditText minejumaLauks = (EditText) findViewById(R.id.minejums);
+        TextView teksts = (TextView) findViewById(R.id.teksts);
+        String vertiba = minejumaLauks.getText().toString();
+
+        int minejums = 0;
+        try {
+            minejums = Integer.parseInt(vertiba);
+        } catch (Exception e) {
+            teksts.setText("Ievadi skaitli!");
+        }
+            if (minejums == iedomatais) {
+                teksts.setText("Tu esi uzminējis!");
+
+                Random r = new Random();
+                iedomatais = r.nextInt(100) + 1;
+            } else {
+                if (iedomatais > minejums) {
+                    teksts.setText("Iedomātais skaitlis ir lielāks!");
+                } else {
+                    teksts.setText("Iedomātais skaitlis ir mazāks!");
+                }
+            }
+        }
+    }
